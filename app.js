@@ -1,8 +1,7 @@
 const yargs = require('yargs');
 const axios = require('axios');
 
-const geocode = require('./geocode.js');
-const weather = require('./weather.js');
+const API_KEY = "<you darksky api key>"
 
 const argv = yargs.option({
     a: {
@@ -25,7 +24,7 @@ axios.get(geocodeUrl).then((response) => {
 
     var lat = response.data.results[0].geometry.location.lat;
     var lng = response.data.results[0].geometry.location.lng;
-    var weatherUrl = `https://api.forecast.io/forecast/4a04d1c42fd9d32c97a2c291a32d5e2d/${lat},${lng}?lang=it&units=si`;
+    var weatherUrl = "https://api.darksky.net/forecast/" + API_KEY + `/${lat},${lng}?lang=it&units=si`;
     console.log(response.data.results[0].formatted_address);
     return axios.get(weatherUrl);
 }).then((response) => {
